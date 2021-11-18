@@ -2,7 +2,7 @@ from django.db import models
 import datetime as dt
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
-# from allauth.socialaccount.models import SocialAccount #added
+
 
 # Create your models here.
 class Neighbourhood(models.Model):
@@ -42,16 +42,6 @@ class User(models.Model):
 
     def __str__(self):
         return self.name.username
-
-# added a property decoretor
- 
-    # @property
-    # def Social(self):
-    #     try:
-    #         social = SocialAccount.objects.get(user = self.user)
-    #         return True
-    #     except SocialAccount.DoesNotExist:
-    #         return False
 
 class Business(models.Model):
     name = models.CharField(max_length = 100)

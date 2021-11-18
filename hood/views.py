@@ -15,9 +15,8 @@ from .forms import *
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
 
-def home(request):
-    return render(request,'dashboard/home.html')
-@login_required
+
+@login_required(login_url="/accounts/login/")
 def index(request):
     '''
     View function to user registration page
@@ -42,7 +41,7 @@ def index(request):
 
     return render(request, 'index.html',{"form":form})
 
-@login_required
+@login_required(login_url="/accounts/login/")
 def home(request):
     '''
     View function to landing page
@@ -58,7 +57,7 @@ def home(request):
 
     return render(request, 'home.html', {"current_user":current_user, "main_user":user, "businesses":businesses, "services":services, "neighbourhood":neighbourhood, "news":news, "gossips":gossips, "announcements":announcements})
 
-@login_required
+@login_required(login_url="/accounts/login/")
 def category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST, request.FILES)
@@ -71,7 +70,7 @@ def category(request):
 
     return redirect('profile')
 
-@login_required
+@login_required(login_url='/accounts/login/')
 def search(request):
     if 'search_name' in request.GET and request.GET['search_name']:
         searched=request.GET.get("search_name")
@@ -88,7 +87,7 @@ def search(request):
         message="You did not search anything please input somrthing to search"
         return render(request,"search.html",{"message":message})
 
-@login_required
+@login_required(login_url="/accounts/login/")
 def profile(request):
     '''
     View function for profile page
@@ -118,7 +117,7 @@ def profile(request):
 
     return render(request,"profile.html",{'profile':profile, "title":title, "form":form, "news":news, "categoryform": categoryform, "main_user":profile})
 
-@login_required
+@login_required(login_url="/accounts/login/")
 def change(request):
     '''
     View function for profile page
@@ -144,7 +143,7 @@ def change(request):
 
     return render(request, "change.html", {"form":form})
 
-@login_required
+@login_required(login_url="/accounts/login/")
 def services(request):
     '''
     View function for services page
@@ -167,7 +166,7 @@ def business(request):
 
     return render(request, 'business.html', {'current_user':current_user, "main_user":user, "businesses":businesses})
 
-@login_required
+@login_required(login_url="/accounts/login/")
 def about(request):
     '''
     View function for about page
@@ -177,7 +176,7 @@ def about(request):
 
     return render(request, 'about.html', {"main_user":user})
 
-@login_required
+@login_required(login_url="/accounts/login/")
 def newbusiness(request):
     '''
     View function for business form page
@@ -199,7 +198,7 @@ def newbusiness(request):
 
     return redirect('user_admin')
 
-@login_required
+@login_required(login_url="/accounts/login/")
 def newservice(request):
     '''
     View function for new service page
@@ -220,7 +219,7 @@ def newservice(request):
 
     return render('user_admin')
 
-@login_required
+@login_required(login_url="/accounts/login/")
 def newneighbourhood(request):
     '''
     View function for new service page
@@ -243,7 +242,7 @@ def newneighbourhood(request):
 
     return render('user_admin')
 
-@login_required
+@login_required(login_url="/accounts/login/")
 def user_admin(request):
     '''
     View function for admin Page
